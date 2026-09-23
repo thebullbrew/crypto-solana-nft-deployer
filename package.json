@@ -1,1 +1,44 @@
-{"dependencies":{"@metaplex-foundation/mpl-candy-machine":"^6.0.1","@metaplex-foundation/mpl-token-metadata":"^3.2.1","@metaplex-foundation/umi":"^0.9.2","@metaplex-foundation/umi-bundle-defaults":"^0.9.2","@solana/web3.js":"^1.95.0","dotenv":"^16.4.5"},"description":"Professional toolkit for deploying NFT collections to Solana","devDependencies":{"@types/node":"^20.14.0","ts-node":"^10.9.2","typescript":"^5.5.0"},"engines":{"node":">=18"},"keywords":["solana","nft","metaplex","candy-machine","web3"],"license":"MIT","main":"dist/index.js","name":"@thebullbrew/solana-nft-deployer","repository":{"type":"git","url":"https://github.com/thebullbrew/solana-nft-deployer.git"},"scripts":{"build":"tsc","collection:create":"ts-node src/collection.ts","deploy":"ts-node src/deploy.ts","lint":"eslint src --ext .ts","mint":"ts-node src/mint.ts","upload":"ts-node src/upload.ts"},"version":"0.1.0"}
+{
+  "dependencies": {
+    "@metaplex-foundation/mpl-candy-machine": "^6.0.1",
+    "@metaplex-foundation/mpl-token-metadata": "^3.2.1",
+    "@metaplex-foundation/umi": "^0.9.2",
+    "@metaplex-foundation/umi-bundle-defaults": "^0.9.2",
+    "@solana/web3.js": "^1.95.0",
+    "dotenv": "^16.4.5",
+    "bs58": "^6.0.0",
+    "@metaplex-foundation/mpl-toolbox": "^0.9.2"
+  },
+  "description": "Professional toolkit for deploying NFT collections to Solana",
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "solana",
+    "nft",
+    "metaplex",
+    "candy-machine",
+    "web3"
+  ],
+  "license": "MIT",
+  "main": "dist/index.js",
+  "name": "@thebullbrew/solana-nft-deployer",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thebullbrew/solana-nft-deployer.git"
+  },
+  "scripts": {
+    "build": "tsc",
+    "collection:create": "ts-node src/collection.ts",
+    "deploy": "ts-node src/deploy.ts",
+    "lint": "eslint src --ext .ts",
+    "mint": "ts-node src/mint.ts",
+    "upload": "ts-node src/upload.ts"
+  },
+  "version": "0.1.0"
+}

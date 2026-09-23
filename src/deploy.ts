@@ -9,6 +9,7 @@ import {
   some,
   sol,
   dateTime,
+  percentAmount,
 } from "@metaplex-foundation/umi";
 import {
   create,
@@ -33,15 +34,16 @@ async function main() {
 
   const candyMachine = generateSigner(umi);
 
-  await create(umi, {
+  const createTx = await create(umi, {
     candyMachine,
     collectionMint: publicKey(config.collectionMint),
     collectionUpdateAuthority: umi.identity,
     tokenStandard: 0, // NonFungible
-    sellerFeeBasisPoints: 500, // 5% royalties
+    sellerFeeBasisPoints: percentAmount(5),
     symbol: config.collectionSymbol,
     maxEditionSupply: 0,
     isMutable: true,
+    itemsAvailable: ITEMS.length,
     creators: [{ address: umi.identity.publicKey, verified: true, percentageShare: 100 }],
     configLineSettings: some({
       prefixName: "",
@@ -51,11 +53,12 @@ async function main() {
       isSequential: false,
     }),
     guards: {
-      solPayment: some({ lamports: sol(config.mintPriceSol).basisPoints, destination: umi.identity.publicKey }),
+      solPayment: some({ lamports: sol(config.mintPriceSol), destination: umi.identity.publicKey }),
       startDate: some({ date: dateTime(config.mintStartDate) }),
       mintLimit: some({ id: 1, limit: 5 }),
     },
-  }).sendAndConfirm(umi);
+  });
+  await createTx.sendAndConfirm(umi);
 
   await addConfigLines(umi, {
     candyMachine: candyMachine.publicKey,
@@ -66,7 +69,7 @@ async function main() {
   // Hand mint authority to the candy machine so only it can mint.
   await setMintAuthority(umi, {
     candyMachine: candyMachine.publicKey,
-    mintAuthority: candyMachine.publicKey,
+    mintAuthority: candyMachine,
   }).sendAndConfirm(umi);
 
   const cm = await fetchCandyMachine(umi, candyMachine.publicKey);

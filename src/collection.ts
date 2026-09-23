@@ -4,10 +4,7 @@
  * Then save the printed mint address as COLLECTION_MINT in .env.
  */
 import { generateSigner, percentAmount } from "@metaplex-foundation/umi";
-import {
-  createNft,
-  TokenStandard,
-} from "@metaplex-foundation/mpl-token-metadata";
+import { createNft } from "@metaplex-foundation/mpl-token-metadata";
 import { loadUmi, config } from "./config";
 
 async function main() {
@@ -28,7 +25,6 @@ async function main() {
     uri: metadataUri,
     sellerFeeBasisPoints: percentAmount(5, 2), // 5% royalties
     isCollection: true,
-    tokenStandard: TokenStandard.NonFungible,
   }).sendAndConfirm(umi);
 
   console.log("Collection created:", collectionMint.publicKey.toString());
